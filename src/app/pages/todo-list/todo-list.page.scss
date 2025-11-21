@@ -1,0 +1,23 @@
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  padding: 20px;
+  text-align: center;
+  color: var(--ion-color-medium);
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+ion-checkbox {
+  margin-inline-start: 16px;
+}

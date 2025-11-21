@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isEditMode ? 'Edit Todo' : 'Tambah Todo' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="form-container">
+    <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+      <ion-input
+        label="Judul"
+        labelPlacement="floating"
+        type="text"
+        formControlName="title"
+        placeholder="Masukkan judul todo"
+        [class.ion-invalid]="todoForm.get('title')?.invalid && todoForm.get('title')?.touched"
+        errorText="Judul minimal 3 karakter">
+      </ion-input>
+
+      <ion-textarea
+        label="Deskripsi"
+        labelPlacement="floating"
+        formControlName="description"
+        placeholder="Masukkan deskripsi todo"
+        rows="5"
+        [class.ion-invalid]="todoForm.get('description')?.invalid && todoForm.get('description')?.touched"
+        errorText="Deskripsi harus diisi">
+      </ion-textarea>
+
+      <div class="button-group">
+        <ion-button expand="block" type="submit" [disabled]="todoForm.invalid">
+          {{ isEditMode ? 'Update' : 'Simpan' }}
+        </ion-button>
+        <ion-button expand="block" fill="outline" type="button" (click)="goBack()">
+          Batal
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

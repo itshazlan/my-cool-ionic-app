@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Daftar Todo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Daftar Todo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    @if (todos$ | async; as todos) { @if (todos.length === 0) {
+    <div class="empty-state">
+      <p>Belum ada todo. Tambahkan todo pertama Anda!</p>
+    </div>
+    } @for (todo of todos; track todo.id) {
+    <ion-item>
+      <ion-checkbox slot="start" [checked]="todo.completed" (ionChange)="toggleCompleted(todo)">
+      </ion-checkbox>
+      <ion-label>
+        <h2 [class.completed]="todo.completed">
+          {{ todo.title }}
+        </h2>
+        <p [class.completed]="todo.completed">
+          {{ todo.description }}
+        </p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="goToEditTodo(todo.id!)">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" fill="clear" color="danger" (click)="deleteTodo(todo)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+    } }
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToAddTodo()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
