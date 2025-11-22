@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  database: 'todolist'
+  database: 'todolist',
+  port: 9000,
+  token: '6a54110919bea2dbe3b5171905a2bc01b59dfa86ffeebe0427142f894edc75b0'
 };
 
 /*

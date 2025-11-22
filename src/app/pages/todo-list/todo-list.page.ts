@@ -13,10 +13,11 @@ import {
   IonButton,
   IonIcon,
   IonFab,
-  IonFabButton
+  IonFabButton,
+  IonCard
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { add, create, trash } from 'ionicons/icons';
+import { add, createOutline, trashOutline, clipboardOutline } from 'ionicons/icons';
 import { TodoService } from '../../services/todo.service';
 import { UiService } from '../../services/ui.service';
 import { Todo } from '../../models/todo.model';
@@ -32,14 +33,14 @@ import { Observable } from 'rxjs';
     IonToolbar,
     IonTitle,
     IonContent,
-    IonList,
     IonItem,
     IonLabel,
     IonCheckbox,
     IonButton,
     IonIcon,
     IonFab,
-    IonFabButton
+    IonFabButton,
+    IonCard
   ]
 })
 export class TodoListPage implements OnInit {
@@ -50,7 +51,7 @@ export class TodoListPage implements OnInit {
   todos$!: Observable<Todo[]>;
 
   constructor() {
-    addIcons({ add, create, trash });
+    addIcons({ add, createOutline, trashOutline, clipboardOutline });
   }
 
   ngOnInit() {

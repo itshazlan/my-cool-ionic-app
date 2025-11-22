@@ -11,8 +11,17 @@ import {
   IonInput,
   IonTextarea,
   IonButtons,
-  IonBackButton
+  IonBackButton,
+  IonIcon,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonItem
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { create, addCircle, checkmarkCircle, save, closeCircle, informationCircle } from 'ionicons/icons';
 import { TodoService } from '../../services/todo.service';
 import { UiService } from '../../services/ui.service';
 
@@ -21,6 +30,7 @@ import { UiService } from '../../services/ui.service';
   templateUrl: './todo-form.page.html',
   styleUrls: ['./todo-form.page.scss'],
   imports: [
+    IonIcon,
     CommonModule,
     ReactiveFormsModule,
     IonHeader,
@@ -31,7 +41,13 @@ import { UiService } from '../../services/ui.service';
     IonInput,
     IonTextarea,
     IonButtons,
-    IonBackButton
+    IonBackButton,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonItem
   ]
 })
 export class TodoFormPage implements OnInit {
@@ -44,6 +60,10 @@ export class TodoFormPage implements OnInit {
   todoForm!: FormGroup;
   todoId: string | null = null;
   isEditMode = false;
+
+  constructor() {
+    addIcons({ create, addCircle, checkmarkCircle, save, closeCircle, informationCircle });
+  }
 
   ngOnInit() {
     this.todoForm = this.fb.group({

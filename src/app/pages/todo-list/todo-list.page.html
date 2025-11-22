@@ -4,39 +4,49 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Daftar Todo</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
-    @if (todos$ | async; as todos) { @if (todos.length === 0) {
+  <div style="max-width: 1200px; margin: 0 auto;">
+    @if (todos$ | async; as todos) {
+    @if (todos.length === 0) {
     <div class="empty-state">
-      <p>Belum ada todo. Tambahkan todo pertama Anda!</p>
+      <ion-icon name="clipboard-outline" size="large"></ion-icon>
+      <p class="empty-title">Belum ada todo</p>
+      <p class="empty-subtitle">Tambahkan todo pertama Anda!</p>
     </div>
-    } @for (todo of todos; track todo.id) {
-    <ion-item>
-      <ion-checkbox slot="start" [checked]="todo.completed" (ionChange)="toggleCompleted(todo)">
-      </ion-checkbox>
-      <ion-label>
-        <h2 [class.completed]="todo.completed">
-          {{ todo.title }}
-        </h2>
-        <p [class.completed]="todo.completed">
-          {{ todo.description }}
-        </p>
-      </ion-label>
-      <ion-button slot="end" fill="clear" (click)="goToEditTodo(todo.id!)">
-        <ion-icon name="create"></ion-icon>
-      </ion-button>
-      <ion-button slot="end" fill="clear" color="danger" (click)="deleteTodo(todo)">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
-    </ion-item>
-    } }
-  </ion-list>
+    } @else {
+    <div class="todo-list">
+      @for (todo of todos; track todo.id) {
+      <ion-card class="todo-card">
+        <ion-item lines="none">
+          <ion-checkbox slot="start" [checked]="todo.completed" (ionChange)="toggleCompleted(todo)">
+          </ion-checkbox>
+          <ion-label>
+            <h2 [class.completed]="todo.completed">
+              {{ todo.title }}
+            </h2>
+            <p [class.completed]="todo.completed">
+              {{ todo.description }}
+            </p>
+          </ion-label>
+          <ion-button fill="clear" size="small" (click)="goToEditTodo(todo.id!)">
+            <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" color="danger" size="small" (click)="deleteTodo(todo)">
+            <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card>
+      }
+    </div>
+    }
+    }
+  </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="goToAddTodo()">

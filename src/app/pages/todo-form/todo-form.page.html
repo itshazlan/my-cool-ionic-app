@@ -7,37 +7,61 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="form-container">
-    <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
-      <ion-input
-        label="Judul"
-        labelPlacement="floating"
-        type="text"
-        formControlName="title"
-        placeholder="Masukkan judul todo"
-        [class.ion-invalid]="todoForm.get('title')?.invalid && todoForm.get('title')?.touched"
-        errorText="Judul minimal 3 karakter">
-      </ion-input>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <ion-card>
+      <ion-card-header>
+        <div class="form-header">
+          <div class="form-icon">
+            <ion-icon [name]="isEditMode ? 'create' : 'add-circle'" size="large"></ion-icon>
+          </div>
+          <ion-card-title>{{ isEditMode ? 'Edit Todo' : 'Buat Todo Baru' }}</ion-card-title>
+          <ion-card-subtitle>Isi form di bawah ini dengan detail todo Anda</ion-card-subtitle>
+        </div>
+      </ion-card-header>
 
-      <ion-textarea
-        label="Deskripsi"
-        labelPlacement="floating"
-        formControlName="description"
-        placeholder="Masukkan deskripsi todo"
-        rows="5"
-        [class.ion-invalid]="todoForm.get('description')?.invalid && todoForm.get('description')?.touched"
-        errorText="Deskripsi harus diisi">
-      </ion-textarea>
+      <ion-card-content>
+        <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+          <ion-item>
+            <ion-input label="Judul Todo" labelPlacement="floating" type="text" formControlName="title"
+              placeholder="Contoh: Belajar Ionic Framework"
+              [class.ion-invalid]="todoForm.get('title')?.invalid && todoForm.get('title')?.touched"
+              errorText="Judul minimal 3 karakter">
+            </ion-input>
+          </ion-item>
 
-      <div class="button-group">
-        <ion-button expand="block" type="submit" [disabled]="todoForm.invalid">
-          {{ isEditMode ? 'Update' : 'Simpan' }}
-        </ion-button>
-        <ion-button expand="block" fill="outline" type="button" (click)="goBack()">
-          Batal
-        </ion-button>
-      </div>
-    </form>
+          <ion-item>
+            <ion-textarea label="Deskripsi" labelPlacement="floating" formControlName="description"
+              placeholder="Jelaskan detail todo Anda..." rows="6"
+              [class.ion-invalid]="todoForm.get('description')?.invalid && todoForm.get('description')?.touched"
+              errorText="Deskripsi harus diisi">
+            </ion-textarea>
+          </ion-item>
+
+          <div class="ion-padding-top">
+            <ion-button expand="block" type="submit" [disabled]="todoForm.invalid">
+              <ion-icon [name]="isEditMode ? 'checkmark-circle' : 'save'" slot="start"></ion-icon>
+              {{ isEditMode ? 'Update Todo' : 'Simpan Todo' }}
+            </ion-button>
+            <ion-button expand="block" fill="outline" type="button" (click)="goBack()">
+              <ion-icon name="close-circle" slot="start"></ion-icon>
+              Batal
+            </ion-button>
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card color="primary" class="ion-margin-top">
+      <ion-card-content>
+        <div class="info-card">
+          <ion-icon name="information-circle"></ion-icon>
+          <div>
+            <strong>Tips:</strong>
+            <p>Buat judul yang jelas dan deskripsi yang detail agar todo Anda mudah dipahami nanti.</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

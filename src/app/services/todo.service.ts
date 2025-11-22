@@ -18,10 +18,12 @@ export class TodoService {
 
   private async initDatabase() {
     try {
-      // Connect to database
+      // Connect to database with configuration
       this.db = await FastSQL.connect({
         database: environment.database
       });
+
+      console.log('Database connected:', this.db);
 
       // Create table if not exists
       await this.db.execute(`

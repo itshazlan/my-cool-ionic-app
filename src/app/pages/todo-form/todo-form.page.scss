@@ -1,16 +1,71 @@
-.form-container {
-  padding: 20px;
+.form-header {
+  text-align: center;
+  padding: 1rem 0;
+
+  .form-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1rem;
+    background: var(--ion-color-primary-tint);
+    border-radius: 50%;
+
+    ion-icon {
+      color: var(--ion-color-primary);
+    }
+  }
+
+  ion-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  ion-card-subtitle {
+    font-size: 0.875rem;
+    color: var(--ion-color-medium);
+  }
 }
 
-ion-input,
-ion-textarea {
-  margin-bottom: 20px;
+ion-card {
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.button-group {
-  margin-top: 30px;
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --inner-padding-end: 0;
+  margin-bottom: 1rem;
 }
 
-.button-group ion-button {
-  margin-bottom: 10px;
+ion-button {
+  margin: 0.5rem 0;
+  height: 44px;
+  font-weight: 600;
+}
+
+.info-card {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+
+  ion-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  strong {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
 }
