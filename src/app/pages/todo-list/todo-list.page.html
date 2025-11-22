@@ -12,8 +12,7 @@
   </ion-header>
 
   <div style="max-width: 1200px; margin: 0 auto;">
-    @if (todos$ | async; as todos) {
-    @if (todos.length === 0) {
+    @if (todos().length === 0) {
     <div class="empty-state">
       <ion-icon name="clipboard-outline" size="large"></ion-icon>
       <p class="empty-title">Belum ada todo</p>
@@ -21,7 +20,7 @@
     </div>
     } @else {
     <div class="todo-list">
-      @for (todo of todos; track todo.id) {
+      @for (todo of todos(); track todo.id) {
       <ion-card class="todo-card">
         <ion-item lines="none">
           <ion-checkbox slot="start" [checked]="todo.completed" (ionChange)="toggleCompleted(todo)">
@@ -44,7 +43,6 @@
       </ion-card>
       }
     </div>
-    }
     }
   </div>
 

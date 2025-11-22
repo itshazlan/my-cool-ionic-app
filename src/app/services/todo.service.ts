@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { FastSQL } from '@capgo/capacitor-fast-sql';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Todo } from '../models/todo.model';
 import { environment } from 'src/environments/environment';
 
@@ -9,8 +8,11 @@ import { environment } from 'src/environments/environment';
 })
 export class TodoService {
   private db: any;
-  private todosSubject = new BehaviorSubject<Todo[]>([]);
+  private todosSignal = signal<Todo[]>([]);
   private initialized = false;
+
+  // Expose as readonly signal
+  readonly todos = this.todosSignal.asReadonly();
 
   constructor() {
     this.initDatabase();
@@ -61,15 +63,15 @@ export class TodoService {
         createdAt: new Date(row.createdAt * 1000),
         updatedAt: row.updatedAt ? new Date(row.updatedAt * 1000) : undefined
       }));
-      this.todosSubject.next(todos);
+      this.todosSignal.set(todos);
     } catch (error) {
       console.error('Error loading todos:', error);
     }
   }
 
-  // Get all todos
-  getTodos(): Observable<Todo[]> {
-    return this.todosSubject.asObservable();
+  // Get all todos as signal
+  getTodos() {
+    return this.todos;
   }
 
   // Get single todo by id
@@ -78,7 +80,7 @@ export class TodoService {
     try {
       const result = await this.db.query('SELECT * FROM todos WHERE id = ?', [parseInt(id)]);
       if (result.length === 0) return null;
-      
+
       const row = result[0];
       return {
         id: row.id.toString(),
@@ -129,7 +131,7 @@ export class TodoService {
         updates.push('completed = ?');
         params.push(todo.completed ? 1 : 0);
       }
-      
+
       updates.push('updatedAt = strftime(\'%s\', \'now\')');
       params.push(parseInt(id));
 

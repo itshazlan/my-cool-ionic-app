@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {
@@ -6,7 +6,6 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonList,
   IonItem,
   IonLabel,
   IonCheckbox,
@@ -21,7 +20,6 @@ import { add, createOutline, trashOutline, clipboardOutline } from 'ionicons/ico
 import { TodoService } from '../../services/todo.service';
 import { UiService } from '../../services/ui.service';
 import { Todo } from '../../models/todo.model';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -48,14 +46,15 @@ export class TodoListPage implements OnInit {
   private uiService = inject(UiService);
   private router = inject(Router);
 
-  todos$!: Observable<Todo[]>;
+  todos: Signal<readonly Todo[]>;
 
   constructor() {
     addIcons({ add, createOutline, trashOutline, clipboardOutline });
+    this.todos = this.todoService.getTodos();
   }
 
   ngOnInit() {
-    this.todos$ = this.todoService.getTodos();
+    // Initialization already done in constructor
   }
 
   async toggleCompleted(todo: Todo) {
