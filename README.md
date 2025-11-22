@@ -34,7 +34,6 @@ Tabel `todos` dengan kolom:
 - `completed` - INTEGER DEFAULT 0 (0 = false, 1 = true)
 - `createdAt` - INTEGER (Unix timestamp)
 - `updatedAt` - INTEGER (Unix timestamp)
-2. Ganti konfigurasi Firebase dengan konfigurasi dari Firebase Console:
 
 ## Instalasi & Menjalankan Aplikasi
 
