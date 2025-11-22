@@ -36,17 +36,6 @@ Tabel `todos` dengan kolom:
 - `updatedAt` - INTEGER (Unix timestamp)
 2. Ganti konfigurasi Firebase dengan konfigurasi dari Firebase Console:
 
-\`\`\`typescript
-export const environment = {
-  production: false,
-  firebaseConfig: {
-    apiKey: "AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    authDomain: "your-project.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project.appspot.com",
-    messagingSenderId: "123456789012",
-    appId: "1:123456789012:web:abcdef123456"
-  }
 ## Instalasi & Menjalankan Aplikasi
 
 ### Install Dependencies
